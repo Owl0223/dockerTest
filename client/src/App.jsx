@@ -7,7 +7,7 @@ import axios from "axios";
 function App() {
   const [data, setData] = useState([{}]);
   useEffect(() => {
-    const url = `http://localhost:4000/api/examples`;
+    const url = `http://209.97.176.187:4000/api/examples`;
     const fetchData = async () => {
       const rsp = await axios(url);
 

@@ -1,0 +1,28 @@
+on: 
+  push:
+    branches:
+      - "main"
+    paths:
+      - "client/**"
+
+jobs:
+  frontend:
+    runs-on: ubuntu-latest
+    steps:
+    - name: "Build the Golang Docker image and start the container"
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: ${{ secrets.SSH_HOST_DEPLOYEMENT_INSTANCE }}
+        username: ${{ secrets.SSH_USER }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        port: ${{ secrets.SSH_PORT }}
+        script: |
+          ls -lhta "/home/dockerTest/"
+          cd /home/dockerTest/ && git pull
+          cd /home/dockerTest/ && git show -s
+  
+          COMPOSE_PROJECT_NAME="maharaja-frontend"
+          cd /home/dockerTest && docker compose rm -fsv frontend
+          cd /home/dockerTest && docker image ls -a
+          cd /home/dockerTest && docker image rm dockertest-frontend
+          cd /home/dockerTest && docker compose up -d frontend

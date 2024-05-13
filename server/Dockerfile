@@ -1,23 +1,22 @@
 # Use a specific Node.js version as the base image
-FROM node:18
+FROM node:18-bookworm
 
 # Install nodemon globally
-RUN npm install -g nodemon
+#RUN npm install -g nodemon
 
 # Set the working directory in the container
 WORKDIR /usr/src/app
 
+# Copy the rest of the application code
+COPY . .
+
 # Copy package.json and package-lock.json to the working directory
-COPY package*.json ./
+#COPY package*.json ./
 
 # Install dependencies
 RUN npm install
 
-# Copy the rest of the application code
-COPY . .
-
 # Expose the port your app runs on
-EXPOSE 4000
+#EXPOSE 4000
 
-# Command to run the application with 'nodemon'
-CMD ["nodemon", "server.js"]
+CMD ["node", "index.js"]

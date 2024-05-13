@@ -13,6 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 // MongoDB connection
 const connectToMongo = async () => {
   try {
+    console.log(process.env.MONGODB_URI);
     await mongoose.connect(process.env.MONGODB_URI);
     console.log("Connected to DB...");
   } catch (error) {

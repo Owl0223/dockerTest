@@ -1,0 +1,37 @@
+services:
+  
+  frontend:
+    build:
+      context: ./client
+      dockerfile: ./Dockerfile
+    ports:
+      - '3000:80'
+    restart: always
+
+  backend:
+    build:
+      context: ./server
+      dockerfile: ./Dockerfile
+        #ports:
+      #- '4000:4000'
+    network_mode: host
+    environment:
+      - MONGODB_URI=mongodb://root:password@127.0.0.1:27017
+      #- MONGODB_URI=mongodb://root:password@209.97.176.187:27017/dummydb
+    restart: always
+        #depends_on:
+        #- mongodb
+  
+  mongodb:
+    build:
+      context: ./mongodb
+      dockerfile: ./Dockerfile
+      network: host
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: password
+    network_mode: host
+    restart: always
+    volumes:
+      - /root/mongodb_data/:/data/
+    # No need to define MongoDB service if it's running outside Docker

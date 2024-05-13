@@ -1,18 +1,17 @@
 # Stage 1 - Build the React app
-FROM node:18 as build
+FROM node:18-bookworm as build-stage
 
 WORKDIR /app
 
-COPY package.json package-lock.json ./
+COPY . .
 RUN npm install
 
-COPY . .
 RUN npm run build
 
 # Stage 2 - Serve the React app with Nginx
-FROM nginx:alpine
+FROM nginx:alpine as deployment-stage
 
-COPY --from=build /app/dist /usr/share/nginx/html
+COPY --from=build-stage /app/dist /usr/share/nginx/html
 
 EXPOSE 80
 
