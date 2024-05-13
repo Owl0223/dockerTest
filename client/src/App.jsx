@@ -19,7 +19,7 @@ function App() {
   return (
     <>
       <div>
-        <h1>Welcome to My MERN App</h1>
+        <h1>Welcome to My MERN EDITED App</h1>
         <p>This is the frontend of the MERN app.</p>
 
         {data.map((element, index) => {
