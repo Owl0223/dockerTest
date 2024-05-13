@@ -9,7 +9,7 @@ jobs:
   backend:
     runs-on: ubuntu-latest
     steps:
-    - name: "Build the Golang Docker image and start the container"
+    - name: "Build the Backend Docker image and start the container"
       uses: appleboy/ssh-action@v1.0.3
       with:
         host: ${{ secrets.SSH_HOST_DEPLOYEMENT_INSTANCE }}

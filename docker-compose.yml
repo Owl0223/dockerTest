@@ -16,7 +16,7 @@ services:
       #- '4000:4000'
     network_mode: host
     environment:
-      - MONGODB_URI=mongodb://root:password@127.0.0.1:27017
+      - MONGODB_URI=mongodb://root:password@127.0.0.1:27017/dummydb?authSource=admin
       #- MONGODB_URI=mongodb://root:password@209.97.176.187:27017/dummydb
     restart: always
         #depends_on:
