@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const app = express();
 const PORT = 4000;
 const cors = require("cors");
+const examples = require('./example.js')
 
 // Middleware
 app.use(express.json());
@@ -15,6 +16,7 @@ const connectToMongo = async () => {
   try {
     console.log(process.env.MONGODB_URI);
     await mongoose.connect(process.env.MONGODB_URI);
+    const db = mongoose.connection.useDb('dummydb')
     console.log("Connected to DB...");
   } catch (error) {
     console.log("Error connecting to DB...\n" + error);
@@ -22,6 +24,7 @@ const connectToMongo = async () => {
 };
 
 connectToMongo();
+// const MyModal = db.model('Examples',examples )
 // Routes
 app.use(require("./route"));
 
